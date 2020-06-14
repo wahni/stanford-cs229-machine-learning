@@ -111,6 +111,23 @@ Theta2WithoutBias = Theta2(:, 2:size(Theta2, 2));
 J = J + (0.5 * lambda / m) * (sum(sum(Theta1WithoutBias .^ 2)) + 
 	sum(sum(Theta2WithoutBias .^ 2)));
 
+
+% 2 Backpropagation
+%   Implement the backpropagation algorithm to compute the gradient for the neural
+%   network cost function.
+%   
+%   For calculations see Backpropagation Algorithm part of week 5, specifically how
+%   it can be written vectorized. First get error term d (partial), then calculate
+%   D (big delta).
+d3 = (a3 - Y);
+D2 = d3 * a2';
+
+d2 = (Theta2WithoutBias' * d3) .* sigmoidGradient(z2);
+D1 = d2 * a1';
+
+Theta1_grad = (1 / m) * D1;
+Theta2_grad = (1 / m) * D2;
+
 % -------------------------------------------------------------
 
 % =========================================================================
