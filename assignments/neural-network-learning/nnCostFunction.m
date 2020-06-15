@@ -128,6 +128,15 @@ D1 = d2 * a1';
 Theta1_grad = (1 / m) * D1;
 Theta2_grad = (1 / m) * D2;
 
+% 2.5 Regularized Neural Networks
+%   "Note that you should not be regularizing the first column of Θ(l) which is used
+%   for the bias term." - means we reuse the ThetaWithoutBias we've created before.
+Accumulator1 = (lambda / m) * [zeros(size(Theta1, 1), 1) Theta1WithoutBias];
+Accumulator2 = (lambda / m) * [zeros(size(Theta2, 1), 1) Theta2WithoutBias];
+
+Theta1_grad += Accumulator1;
+Theta2_grad += Accumulator2;
+
 % -------------------------------------------------------------
 
 % =========================================================================
