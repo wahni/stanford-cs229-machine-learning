@@ -50,6 +50,10 @@ J = J + lambda / 2 * (sum(sum(Theta .^ 2)) + sum(sum(X .^ 2)));
 X_grad = R .* (X * Theta' - Y) * Theta;
 Theta_grad = R' .* (Theta * X' - Y') * X;
 
+% 2.2.4 Regularized gradient
+X_grad = X_grad + lambda * X;
+Theta_grad = Theta_grad + lambda * Theta;
+
 % =============================================================
 
 grad = [X_grad(:); Theta_grad(:)];
