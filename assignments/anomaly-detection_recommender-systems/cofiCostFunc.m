@@ -43,6 +43,9 @@ Theta_grad = zeros(size(Theta));
 % 2.2.1 Collaborative filtering cost function
 J = 1 / 2 * sum(sum(R .* (X * Theta' - Y) .^ 2));
 
+% 2.2.3 Regularized cost function
+J = J + lambda / 2 * (sum(sum(Theta .^ 2)) + sum(sum(X .^ 2)));
+
 % 2.2.2 Collaborative filtering gradient
 X_grad = R .* (X * Theta' - Y) * Theta;
 Theta_grad = R' .* (Theta * X' - Y') * X;
